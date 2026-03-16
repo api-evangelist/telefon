@@ -2,7 +2,7 @@ name: Telefon API
 description: APIs for the Telefon communication platform
 image: https://example.com/telefon-logo.png
 created: '2024-01-15'
-modified: '2024-01-15'
+modified: '2026-03-16'
 url: https://telefon.example.com/apis.json
 specificationVersion: '0.16'
 apis:
