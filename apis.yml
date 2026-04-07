@@ -15,10 +15,10 @@ apis:
     baseURL: https://api.telefon.example.com/v1/voice
     version: v1
     tags:
-      - Voice
       - Calls
-      - Telephony
       - Communications
+      - Telephony
+      - Voice
     properties:
       - type: Documentation
         url: https://telefon.example.com/docs/voice/reference
@@ -42,10 +42,10 @@ apis:
     baseURL: https://api.telefon.example.com/v1/sms
     version: v1
     tags:
-      - SMS
-      - Messaging
-      - Text Messages
       - Communications
+      - Messaging
+      - SMS
+      - Text Messages
     properties:
       - type: Documentation
         url: https://telefon.example.com/docs/sms/reference
@@ -71,9 +71,9 @@ apis:
     baseURL: https://api.telefon.example.com/v1/numbers
     version: v1
     tags:
-      - Phone Numbers
-      - Number Provisioning
       - Number Management
+      - Number Provisioning
+      - Phone Numbers
       - Telephony
     properties:
       - type: Documentation
@@ -95,8 +95,8 @@ apis:
     baseURL: https://api.telefon.example.com/v1/recording
     version: v1
     tags:
-      - Call Recording
       - Audio
+      - Call Recording
       - Compliance
       - Storage
     properties:
