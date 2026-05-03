@@ -1,0 +1,68 @@
+name: Telefon Vocabulary
+description: >-
+  Vocabulary for the Telefon cloud communications platform covering voice, SMS,
+  number management, recording, transcription, and CPaaS concepts.
+version: '1.0'
+created: '2026-05-03'
+modified: '2026-05-03'
+
+categories:
+  - name: Voice
+    terms:
+      - term: Call
+        definition: A telephone call session. Can be inbound or outbound.
+        tags: [Voice, Core]
+      - term: IVR
+        definition: Interactive Voice Response — automated phone system using voice prompts and DTMF input.
+        tags: [Voice]
+      - term: TTS
+        definition: Text-to-Speech — converting written text to spoken audio in a call.
+        tags: [Voice]
+      - term: Conference
+        definition: A multi-party call where multiple participants are connected in one audio session.
+        tags: [Voice, Conferencing]
+      - term: SIP Trunking
+        definition: Using SIP protocol to connect your PBX or telephony system to the public telephone network via Telefon.
+        tags: [Voice, Protocol]
+      - term: WebRTC
+        definition: Browser and mobile technology for real-time voice calls without phone lines.
+        tags: [Voice, Protocol]
+      - term: AMD
+        definition: Answering Machine Detection — identifies if a call was answered by a human or voicemail.
+        tags: [Voice]
+  - name: SMS
+    terms:
+      - term: A2P
+        definition: Application-to-Person messaging — messages sent from a software application to a person's phone.
+        tags: [SMS]
+      - term: Two-Way SMS
+        definition: Conversational SMS where both sending and receiving occur on the same number.
+        tags: [SMS]
+      - term: Delivery Receipt
+        definition: Status confirmation that an SMS reached the recipient's handset.
+        tags: [SMS]
+      - term: Short Code
+        definition: A 5-6 digit number used for high-volume A2P messaging campaigns.
+        tags: [SMS, Numbers]
+  - name: Recording
+    terms:
+      - term: Dual-Channel Recording
+        definition: Recording caller and callee audio on separate tracks for analysis.
+        tags: [Recording]
+      - term: Transcription
+        definition: Converting recorded audio to text using AI speech recognition.
+        tags: [Recording, AI]
+      - term: PII Redaction
+        definition: Automatically removing personally identifiable information from transcripts.
+        tags: [Recording, Compliance]
+  - name: Platform
+    terms:
+      - term: CPaaS
+        definition: Communications Platform as a Service — cloud APIs for embedding communications into apps.
+        tags: [Platform]
+      - term: E.164
+        definition: International phone number format starting with + and country code.
+        tags: [Platform, Standard]
+      - term: Webhook
+        definition: HTTPS callback URL receiving real-time event notifications.
+        tags: [Platform, Integration]

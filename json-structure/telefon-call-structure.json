@@ -1,0 +1,17 @@
+{
+  "name": "Telefon Call",
+  "description": "Structure of a Call object in the Telefon Voice API",
+  "fields": [
+    { "name": "id", "type": "string", "required": true, "description": "Unique call identifier" },
+    { "name": "status", "type": "string", "required": true, "description": "queued, ringing, in-progress, completed, failed, busy, no-answer, canceled" },
+    { "name": "direction", "type": "string", "required": true, "description": "inbound or outbound" },
+    { "name": "from", "type": "string", "required": true, "description": "Originating phone number (E.164)" },
+    { "name": "to", "type": "string", "required": true, "description": "Destination phone number (E.164)" },
+    { "name": "duration", "type": "integer", "required": false, "description": "Duration in seconds" },
+    { "name": "start_time", "type": "string", "required": false, "description": "ISO 8601 call start time" },
+    { "name": "end_time", "type": "string", "required": false, "description": "ISO 8601 call end time" },
+    { "name": "price", "type": "string", "required": false, "description": "Call cost" },
+    { "name": "price_unit", "type": "string", "required": false, "description": "ISO 4217 currency" },
+    { "name": "recording_url", "type": "string", "required": false, "description": "Recording download URL" }
+  ]
+}

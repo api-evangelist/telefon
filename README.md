@@ -1,102 +1,86 @@
-# Telefon API (telefon)
-APIs for the Telefon communication platform
+# Telefon
 
-**URL:** [Visit APIs.json URL](https://telefon.example.com/apis.json)
+Telefon is a cloud-based programmable communications platform providing voice, SMS, number management, and call recording APIs for developers and enterprises. The platform covers 180+ countries with competitive per-minute and per-message pricing and AI-powered transcription.
 
-## Timestamps
-
-- **Created:** 2024-01-15 
-- **Modified:** 2024-01-15 
+**Human URL:** [https://www.telefon.com](https://www.telefon.com)
+**Developer URL:** [https://developers.telefon.com](https://developers.telefon.com)
 
 ## APIs
 
 ### Telefon Voice API
-API for making and managing voice calls through the Telefon platform
-
-**Human URL:** [https://telefon.example.com/docs/voice](https://telefon.example.com/docs/voice)
-
-
-#### Tags:
-
- - Voice, Calls, Telephony, Communications
-
-#### Properties
-
-- [Documentation](https://telefon.example.com/docs/voice/reference)
-- [OpenAPI](https://api.telefon.example.com/v1/voice/openapi.json)
-- [Swagger](https://api.telefon.example.com/v1/voice/swagger.json)
-- [Authentication](https://telefon.example.com/docs/authentication)
-- [Pricing](https://telefon.example.com/pricing/voice)
+Programmable voice for calls, conferencing, IVR, SIP trunking, and WebRTC.
+- **OpenAPI Spec:** [openapi/telefon-voice-openapi.yml](openapi/telefon-voice-openapi.yml)
 
 ### Telefon SMS API
-API for sending and receiving SMS messages
-
-**Human URL:** [https://telefon.example.com/docs/sms](https://telefon.example.com/docs/sms)
-
-
-#### Tags:
-
- - SMS, Messaging, Text Messages, Communications
-
-#### Properties
-
-- [Documentation](https://telefon.example.com/docs/sms/reference)
-- [OpenAPI](https://api.telefon.example.com/v1/sms/openapi.json)
-- [Swagger](https://api.telefon.example.com/v1/sms/swagger.json)
-- [Authentication](https://telefon.example.com/docs/authentication)
-- [Pricing](https://telefon.example.com/pricing/sms)
-- [Rate Limits](https://telefon.example.com/docs/sms/rate-limits)
+Global A2P SMS and MMS with delivery receipts and two-way messaging.
+- **OpenAPI Spec:** [openapi/telefon-sms-openapi.yml](openapi/telefon-sms-openapi.yml)
 
 ### Telefon Number Management API
-API for purchasing, configuring, and managing phone numbers
-
-**Human URL:** [https://telefon.example.com/docs/numbers](https://telefon.example.com/docs/numbers)
-
-
-#### Tags:
-
- - Phone Numbers, Number Provisioning, Number Management, Telephony
-
-#### Properties
-
-- [Documentation](https://telefon.example.com/docs/numbers/reference)
-- [OpenAPI](https://api.telefon.example.com/v1/numbers/openapi.json)
-- [Authentication](https://telefon.example.com/docs/authentication)
-- [Pricing](https://telefon.example.com/pricing/numbers)
+Phone number provisioning across 70+ countries — local, mobile, toll-free, short codes.
+- **OpenAPI Spec:** [openapi/telefon-numbers-openapi.yml](openapi/telefon-numbers-openapi.yml)
 
 ### Telefon Call Recording API
-API for recording, storing, and retrieving call recordings
+Dual-channel recording with AI transcription in 30+ languages and PII redaction.
+- **OpenAPI Spec:** [openapi/telefon-recording-openapi.yml](openapi/telefon-recording-openapi.yml)
 
-**Human URL:** [https://telefon.example.com/docs/recording](https://telefon.example.com/docs/recording)
+## Artifacts
 
+### OpenAPI Specifications
+| File | Description |
+|---|---|
+| [openapi/telefon-voice-openapi.yml](openapi/telefon-voice-openapi.yml) | Voice API — calls and conferencing |
+| [openapi/telefon-sms-openapi.yml](openapi/telefon-sms-openapi.yml) | SMS API — send/receive messages |
+| [openapi/telefon-numbers-openapi.yml](openapi/telefon-numbers-openapi.yml) | Number Management API |
+| [openapi/telefon-recording-openapi.yml](openapi/telefon-recording-openapi.yml) | Recording API with transcription |
 
-#### Tags:
+### JSON Schemas
+| File | Description |
+|---|---|
+| [json-schema/telefon-call-schema.json](json-schema/telefon-call-schema.json) | Call object JSON Schema |
 
- - Call Recording, Audio, Compliance, Storage
+### JSON Structure
+| File | Description |
+|---|---|
+| [json-structure/telefon-call-structure.json](json-structure/telefon-call-structure.json) | Call object field structure |
 
-#### Properties
+### JSON-LD
+| File | Description |
+|---|---|
+| [json-ld/telefon-context.jsonld](json-ld/telefon-context.jsonld) | JSON-LD context for Telefon data types |
 
-- [Documentation](https://telefon.example.com/docs/recording/reference)
-- [OpenAPI](https://api.telefon.example.com/v1/recording/openapi.json)
-- [Authentication](https://telefon.example.com/docs/authentication)
-- [Privacy Policy](https://telefon.example.com/privacy)
-- [Compliance](https://telefon.example.com/compliance)
+### Examples
+| File | Description |
+|---|---|
+| [examples/telefon-create-call-example.json](examples/telefon-create-call-example.json) | Create a voice call |
+| [examples/telefon-send-sms-example.json](examples/telefon-send-sms-example.json) | Send an SMS message |
+
+### Spectral Rules
+| File | Description |
+|---|---|
+| [rules/telefon-rules.yml](rules/telefon-rules.yml) | Spectral ruleset for Telefon API conventions |
+
+### Naftiko Capabilities
+| File | Description |
+|---|---|
+| [capabilities/shared/telefon-voice.yaml](capabilities/shared/telefon-voice.yaml) | Shared Voice API capability |
+| [capabilities/shared/telefon-sms.yaml](capabilities/shared/telefon-sms.yaml) | Shared SMS API capability |
+| [capabilities/telephony-platform.yaml](capabilities/telephony-platform.yaml) | Communications platform workflow (REST port 8080, MCP port 9090) |
+
+### Vocabulary
+| File | Description |
+|---|---|
+| [vocabulary/telefon-vocabulary.yml](vocabulary/telefon-vocabulary.yml) | Telefon platform vocabulary |
 
 ## Common Properties
 
-- [Getting Started](https://telefon.example.com/docs/getting-started)
-- [Authentication](https://telefon.example.com/docs/authentication)
-- [SDKs](https://telefon.example.com/sdks)
-- [Status Page](https://status.telefon.example.com)
-- [Terms of Service](https://telefon.example.com/terms)
-- [Privacy Policy](https://telefon.example.com/privacy)
-- [Support](https://telefon.example.com/support)
-- [Blog](https://telefon.example.com/blog)
-- [Change Log](https://telefon.example.com/changelog)
-- [Pricing](https://telefon.example.com/pricing)
+| Property | URL |
+|---|---|
+| Getting Started | https://developers.telefon.com/getting-started |
+| Authentication | https://developers.telefon.com/authentication |
+| SDKs | https://www.telefon.com/sdks |
+| Status | https://status.telefon.com |
+| Terms of Service | https://www.telefon.com/terms |
+| Pricing | https://www.telefon.com/pricing |
 
 ## Maintainers
-
-**FN:** Telefon API Team
-
-**Email:** api-team@telefon.example.com
+- **Telefon API Team** — api@telefon.com

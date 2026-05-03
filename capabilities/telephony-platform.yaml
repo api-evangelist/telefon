@@ -1,0 +1,180 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Telefon Communications Platform"
+  description: >-
+    Unified capability combining Telefon Voice and SMS APIs for comprehensive
+    programmable communications. Supports voice calls, conferencing, SMS messaging,
+    and recording across 180+ countries. Designed for developers building customer
+    communication, notification, and engagement applications.
+  tags:
+    - Communications
+    - CPaaS
+    - Messaging
+    - SMS
+    - Telephony
+    - Voice
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+binds:
+  - namespace: env
+    keys:
+      TELEFON_API_KEY: TELEFON_API_KEY
+
+capability:
+  consumes:
+    - import: telefon-voice
+      location: ./shared/telefon-voice.yaml
+    - import: telefon-sms
+      location: ./shared/telefon-sms.yaml
+
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: telefon-platform-api
+      description: "Unified REST API for Telefon communications."
+      resources:
+        - path: /v1/calls
+          name: calls
+          description: "Voice call management"
+          operations:
+            - method: GET
+              name: list-calls
+              description: "List voice calls"
+              call: "telefon-voice.list-calls"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-call
+              description: "Initiate an outbound voice call"
+              call: "telefon-voice.create-call"
+              with:
+                to: "rest.to"
+                from: "rest.from"
+                url: "rest.url"
+                record: "rest.record"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/conferences
+          name: conferences
+          description: "Conference call management"
+          operations:
+            - method: GET
+              name: list-conferences
+              description: "List conferences"
+              call: "telefon-voice.list-conferences"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-conference
+              description: "Create a conference room"
+              call: "telefon-voice.create-conference"
+              with:
+                friendly_name: "rest.friendly_name"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/messages
+          name: messages
+          description: "SMS and MMS messaging"
+          operations:
+            - method: GET
+              name: list-messages
+              description: "List messages"
+              call: "telefon-sms.list-messages"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: send-message
+              description: "Send an SMS or MMS message"
+              call: "telefon-sms.send-message"
+              with:
+                to: "rest.to"
+                from: "rest.from"
+                body: "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9090
+      namespace: telefon-platform-mcp
+      transport: http
+      description: "MCP server for Telefon voice and SMS communications."
+      tools:
+        - name: list-calls
+          description: "List voice calls with optional status and direction filters"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "telefon-voice.list-calls"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: make-call
+          description: "Initiate an outbound phone call to a number"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "telefon-voice.create-call"
+          with:
+            to: "tools.to"
+            from: "tools.from"
+            url: "tools.url"
+            record: "tools.record"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-conferences
+          description: "List active and completed conferences"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "telefon-voice.list-conferences"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-conference
+          description: "Create a new conference call room"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "telefon-voice.create-conference"
+          with:
+            friendly_name: "tools.friendly_name"
+            record: "tools.record"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-messages
+          description: "List sent and received SMS and MMS messages"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "telefon-sms.list-messages"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: send-sms
+          description: "Send an SMS or MMS message globally"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "telefon-sms.send-message"
+          with:
+            to: "tools.to"
+            from: "tools.from"
+            body: "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."

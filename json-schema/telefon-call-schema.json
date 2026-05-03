@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://developers.telefon.com/schema/call",
+  "title": "Telefon Call",
+  "description": "Represents a voice call in the Telefon platform, either inbound or outbound.",
+  "type": "object",
+  "required": ["id", "status", "direction", "from", "to"],
+  "properties": {
+    "id": { "type": "string", "description": "Unique call identifier" },
+    "status": { "type": "string", "enum": ["queued","ringing","in-progress","completed","failed","busy","no-answer","canceled"], "description": "Current call status" },
+    "direction": { "type": "string", "enum": ["inbound","outbound"], "description": "Call direction" },
+    "from": { "type": "string", "pattern": "^\\+[1-9]\\d{1,14}$", "description": "Originating phone number (E.164)" },
+    "to": { "type": "string", "pattern": "^\\+[1-9]\\d{1,14}$", "description": "Destination phone number (E.164)" },
+    "duration": { "type": "integer", "minimum": 0, "description": "Duration in seconds" },
+    "start_time": { "type": "string", "format": "date-time", "description": "Call start time" },
+    "end_time": { "type": "string", "format": "date-time", "description": "Call end time" },
+    "price": { "type": "string", "description": "Cost of the call" },
+    "price_unit": { "type": "string", "description": "ISO 4217 currency code" },
+    "recording_url": { "type": "string", "format": "uri", "description": "Recording download URL if recorded" }
+  }
+}

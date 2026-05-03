@@ -1,0 +1,264 @@
+openapi: 3.0.3
+info:
+  title: Telefon Number Management API
+  description: >-
+    Search, purchase, configure, and manage phone numbers across 70+ countries.
+    Supports local, national, mobile, toll-free, and short code numbers.
+  version: v1
+  contact:
+    name: Telefon Support
+    url: https://www.telefon.com/support
+  termsOfService: https://www.telefon.com/terms
+servers:
+  - url: https://api.telefon.com/v1/numbers
+    description: Telefon Number Management API
+security:
+  - ApiKeyAuth: []
+tags:
+  - name: Available Numbers
+    description: Search for available numbers to purchase
+  - name: Owned Numbers
+    description: Manage numbers in your account
+paths:
+  /available:
+    get:
+      operationId: searchAvailableNumbers
+      summary: Search Available Numbers
+      description: Search for available phone numbers matching specified criteria.
+      tags:
+        - Available Numbers
+      parameters:
+        - name: country_code
+          in: query
+          required: true
+          schema:
+            type: string
+          description: ISO 3166-1 alpha-2 country code
+        - name: type
+          in: query
+          schema:
+            type: string
+            enum: [local, national, mobile, toll-free, short-code]
+          description: Number type
+        - name: area_code
+          in: query
+          schema:
+            type: string
+          description: Area code for local numbers
+        - name: sms_enabled
+          in: query
+          schema:
+            type: boolean
+          description: Filter for SMS-capable numbers
+        - name: voice_enabled
+          in: query
+          schema:
+            type: boolean
+          description: Filter for voice-capable numbers
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            maximum: 20
+          description: Max results to return
+      responses:
+        '200':
+          description: Available numbers
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  available_numbers:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/AvailableNumber'
+  /owned:
+    get:
+      operationId: listOwnedNumbers
+      summary: List Owned Numbers
+      description: List all phone numbers in your account.
+      tags:
+        - Owned Numbers
+      parameters:
+        - name: type
+          in: query
+          schema:
+            type: string
+          description: Filter by number type
+        - name: page
+          in: query
+          schema:
+            type: integer
+          description: Page number
+        - name: page_size
+          in: query
+          schema:
+            type: integer
+            maximum: 100
+          description: Results per page
+      responses:
+        '200':
+          description: Owned numbers
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  numbers:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/OwnedNumber'
+                  total:
+                    type: integer
+    post:
+      operationId: purchaseNumber
+      summary: Purchase Number
+      description: Purchase a phone number.
+      tags:
+        - Owned Numbers
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - phone_number
+              properties:
+                phone_number:
+                  type: string
+                  description: Number to purchase in E.164 format
+                voice_url:
+                  type: string
+                  description: Webhook URL for inbound calls
+                sms_url:
+                  type: string
+                  description: Webhook URL for inbound SMS
+                friendly_name:
+                  type: string
+                  description: Label for the number
+      responses:
+        '201':
+          description: Number purchased
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OwnedNumber'
+  /owned/{phone_number}:
+    get:
+      operationId: getOwnedNumber
+      summary: Get Owned Number
+      description: Get configuration for a specific owned number.
+      tags:
+        - Owned Numbers
+      parameters:
+        - name: phone_number
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Phone number in E.164 format
+      responses:
+        '200':
+          description: Number details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OwnedNumber'
+    delete:
+      operationId: releaseNumber
+      summary: Release Number
+      description: Release a phone number from your account.
+      tags:
+        - Owned Numbers
+      parameters:
+        - name: phone_number
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Phone number in E.164 format
+      responses:
+        '204':
+          description: Number released
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+  schemas:
+    AvailableNumber:
+      type: object
+      required:
+        - phone_number
+        - country_code
+        - type
+      properties:
+        phone_number:
+          type: string
+          description: Phone number in E.164 format
+        friendly_name:
+          type: string
+          description: Formatted display number
+        country_code:
+          type: string
+          description: ISO country code
+        type:
+          type: string
+          enum: [local, national, mobile, toll-free, short-code]
+          description: Number type
+        capabilities:
+          type: object
+          properties:
+            voice:
+              type: boolean
+            sms:
+              type: boolean
+            mms:
+              type: boolean
+        monthly_rate:
+          type: string
+          description: Monthly cost
+    OwnedNumber:
+      type: object
+      required:
+        - phone_number
+        - type
+      properties:
+        phone_number:
+          type: string
+          description: Phone number in E.164 format
+        friendly_name:
+          type: string
+          description: Label for the number
+        type:
+          type: string
+          enum: [local, national, mobile, toll-free, short-code]
+          description: Number type
+        country_code:
+          type: string
+          description: ISO country code
+        capabilities:
+          type: object
+          properties:
+            voice:
+              type: boolean
+            sms:
+              type: boolean
+            mms:
+              type: boolean
+        voice_url:
+          type: string
+          description: Webhook URL for inbound calls
+        sms_url:
+          type: string
+          description: Webhook URL for inbound SMS
+        date_created:
+          type: string
+          format: date-time
+          description: Purchase date
+        monthly_rate:
+          type: string
+          description: Monthly rate

@@ -1,0 +1,27 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "https://api.telefon.com/v1/sms/messages",
+    "headers": { "X-API-Key": "YOUR_API_KEY", "Content-Type": "application/json" },
+    "body": {
+      "to": "+4915123456789",
+      "from": "+4930123456789",
+      "body": "Your appointment is confirmed for May 5, 2026 at 14:00. Reply CANCEL to cancel.",
+      "status_callback": "https://your-app.example.com/sms-status"
+    }
+  },
+  "response": {
+    "id": "SM9876543210fedcba9876543210fedcba",
+    "status": "queued",
+    "direction": "outbound",
+    "from": "+4930123456789",
+    "to": "+4915123456789",
+    "body": "Your appointment is confirmed for May 5, 2026 at 14:00. Reply CANCEL to cancel.",
+    "num_segments": 1,
+    "num_media": 0,
+    "price": null,
+    "price_unit": "EUR",
+    "date_created": "2026-05-03T10:00:00Z",
+    "date_sent": null
+  }
+}

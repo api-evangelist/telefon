@@ -1,0 +1,27 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "https://api.telefon.com/v1/voice/calls",
+    "headers": { "X-API-Key": "YOUR_API_KEY", "Content-Type": "application/json" },
+    "body": {
+      "to": "+4930123456789",
+      "from": "+4915123456789",
+      "url": "https://your-app.example.com/call-webhook",
+      "status_callback": "https://your-app.example.com/call-status",
+      "record": true,
+      "timeout": 30
+    }
+  },
+  "response": {
+    "id": "CA9876543210fedcba9876543210fedcba",
+    "status": "queued",
+    "direction": "outbound",
+    "from": "+4915123456789",
+    "to": "+4930123456789",
+    "start_time": null,
+    "end_time": null,
+    "duration": null,
+    "price": null,
+    "price_unit": "EUR"
+  }
+}
