@@ -89,7 +89,7 @@ apis:
         url: https://developers.telefon.com/authentication
       - type: Pricing
         url: https://www.telefon.com/pricing/sms
-      - type: Rate Limits
+      - type: RateLimits
         url: https://developers.telefon.com/rate-limits
     contact:
       - type: Email
@@ -153,7 +153,7 @@ apis:
         url: openapi/telefon-recording-openapi.yml
       - type: Authentication
         url: https://developers.telefon.com/authentication
-      - type: Privacy Policy
+      - type: PrivacyPolicy
         url: https://www.telefon.com/privacy
       - type: Compliance
         url: https://www.telefon.com/compliance
@@ -162,23 +162,23 @@ apis:
         url: mailto:api@telefon.com
 
 common:
-  - type: Getting Started
+  - type: GettingStarted
     url: https://developers.telefon.com/getting-started
   - type: Authentication
     url: https://developers.telefon.com/authentication
   - type: SDKs
     url: https://www.telefon.com/sdks
-  - type: Status Page
+  - type: StatusPage
     url: https://status.telefon.com
-  - type: Terms of Service
+  - type: TermsOfService
     url: https://www.telefon.com/terms
-  - type: Privacy Policy
+  - type: PrivacyPolicy
     url: https://www.telefon.com/privacy
   - type: Support
     url: https://www.telefon.com/support
   - type: Blog
     url: https://blog.telefon.com
-  - type: Change Log
+  - type: ChangeLog
     url: https://developers.telefon.com/changelog
   - type: Pricing
     url: https://www.telefon.com/pricing
