@@ -1,0 +1,176 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Telefon Call Recording API — Recordings
+  description: 'Telefon Call Recording API — Recordings. 3 operations. Lead operation: List Recordings. Self-contained Naftiko
+    capability covering one Telefon business surface.'
+  tags:
+  - Telefon
+  - Recordings
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    TELEFON_API_KEY: TELEFON_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: recording-recordings
+    baseUri: https://api.telefon.com/v1/recording
+    description: Telefon Call Recording API — Recordings business capability. Self-contained, no shared references.
+    resources:
+    - name: recordings
+      path: /recordings
+      operations:
+      - name: listrecordings
+        method: GET
+        description: List Recordings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: call_id
+          in: query
+          type: string
+          description: Filter by call ID
+        - name: status
+          in: query
+          type: string
+          description: Filter by status
+        - name: page
+          in: query
+          type: integer
+          description: Page number
+        - name: page_size
+          in: query
+          type: integer
+          description: Results per page
+    - name: recordings-recording_id
+      path: /recordings/{recording_id}
+      operations:
+      - name: getrecording
+        method: GET
+        description: Get Recording
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: recording_id
+          in: path
+          type: string
+          description: Unique recording identifier
+          required: true
+      - name: deleterecording
+        method: DELETE
+        description: Delete Recording
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: recording_id
+          in: path
+          type: string
+          description: Unique recording identifier
+          required: true
+    authentication:
+      type: apikey
+      key: X-API-Key
+      value: '{{env.TELEFON_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: recording-recordings-rest
+    port: 8080
+    description: REST adapter for Telefon Call Recording API — Recordings. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/recordings
+      name: recordings
+      description: REST surface for recordings.
+      operations:
+      - method: GET
+        name: listrecordings
+        description: List Recordings
+        call: recording-recordings.listrecordings
+        with:
+          call_id: rest.call_id
+          status: rest.status
+          page: rest.page
+          page_size: rest.page_size
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/recordings/{recording-id}
+      name: recordings-recording-id
+      description: REST surface for recordings-recording_id.
+      operations:
+      - method: GET
+        name: getrecording
+        description: Get Recording
+        call: recording-recordings.getrecording
+        with:
+          recording_id: rest.recording_id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleterecording
+        description: Delete Recording
+        call: recording-recordings.deleterecording
+        with:
+          recording_id: rest.recording_id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: recording-recordings-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Telefon Call Recording API — Recordings. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-recordings
+      description: List Recordings
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: recording-recordings.listrecordings
+      with:
+        call_id: tools.call_id
+        status: tools.status
+        page: tools.page
+        page_size: tools.page_size
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-recording
+      description: Get Recording
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: recording-recordings.getrecording
+      with:
+        recording_id: tools.recording_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-recording
+      description: Delete Recording
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: recording-recordings.deleterecording
+      with:
+        recording_id: tools.recording_id
+      outputParameters:
+      - type: object
+        mapping: $.
