@@ -182,6 +182,8 @@ common:
   url: https://www.telefon.com/pricing
 - type: GitHub
   url: https://github.com/telefon-api
+- type: LLMsTxt
+  url: https://telefon.com/llms.txt
 maintainers:
 - name: Telefon API Team
   email: api@telefon.com
