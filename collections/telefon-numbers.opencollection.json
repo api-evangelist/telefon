@@ -1,0 +1,167 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Telefon Number Management API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-Key",
+      "value": "{{X-API-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Available Numbers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Available Numbers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.telefon.com/v1/numbers/available",
+            "params": [
+              {
+                "name": "country_code",
+                "value": "",
+                "type": "query",
+                "description": "ISO 3166-1 alpha-2 country code"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Number type"
+              },
+              {
+                "name": "area_code",
+                "value": "",
+                "type": "query",
+                "description": "Area code for local numbers"
+              },
+              {
+                "name": "sms_enabled",
+                "value": "",
+                "type": "query",
+                "description": "Filter for SMS-capable numbers"
+              },
+              {
+                "name": "voice_enabled",
+                "value": "",
+                "type": "query",
+                "description": "Filter for voice-capable numbers"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Max results to return"
+              }
+            ]
+          },
+          "docs": "Search for available phone numbers matching specified criteria."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Owned Numbers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Owned Numbers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.telefon.com/v1/numbers/owned",
+            "params": [
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by number type"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Results per page"
+              }
+            ]
+          },
+          "docs": "List all phone numbers in your account."
+        },
+        {
+          "info": {
+            "name": "Purchase Number",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.telefon.com/v1/numbers/owned",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Purchase a phone number."
+        },
+        {
+          "info": {
+            "name": "Get Owned Number",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.telefon.com/v1/numbers/owned/:phone_number",
+            "params": [
+              {
+                "name": "phone_number",
+                "value": "",
+                "type": "path",
+                "description": "Phone number in E.164 format"
+              }
+            ]
+          },
+          "docs": "Get configuration for a specific owned number."
+        },
+        {
+          "info": {
+            "name": "Release Number",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.telefon.com/v1/numbers/owned/:phone_number",
+            "params": [
+              {
+                "name": "phone_number",
+                "value": "",
+                "type": "path",
+                "description": "Phone number in E.164 format"
+              }
+            ]
+          },
+          "docs": "Release a phone number from your account."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

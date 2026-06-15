@@ -1,0 +1,151 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Telefon Call Recording API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-Key",
+      "value": "{{X-API-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Recordings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Recordings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.telefon.com/v1/recording/recordings",
+            "params": [
+              {
+                "name": "call_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by call ID"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by status"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Results per page"
+              }
+            ]
+          },
+          "docs": "List call recordings with optional filtering."
+        },
+        {
+          "info": {
+            "name": "Get Recording",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.telefon.com/v1/recording/recordings/:recording_id",
+            "params": [
+              {
+                "name": "recording_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique recording identifier"
+              }
+            ]
+          },
+          "docs": "Get details and download URL for a recording."
+        },
+        {
+          "info": {
+            "name": "Delete Recording",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.telefon.com/v1/recording/recordings/:recording_id",
+            "params": [
+              {
+                "name": "recording_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique recording identifier"
+              }
+            ]
+          },
+          "docs": "Permanently delete a recording."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Transcriptions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Recording Transcriptions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.telefon.com/v1/recording/recordings/:recording_id/transcriptions",
+            "params": [
+              {
+                "name": "recording_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique recording identifier"
+              }
+            ]
+          },
+          "docs": "List transcriptions for a recording."
+        },
+        {
+          "info": {
+            "name": "Create Transcription",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.telefon.com/v1/recording/recordings/:recording_id/transcriptions",
+            "params": [
+              {
+                "name": "recording_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique recording identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Request AI transcription of a recording."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
