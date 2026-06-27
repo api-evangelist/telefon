@@ -3,16 +3,10 @@
   "feeds": [
     {
       "source": "https://blog.telefon.com",
-      "error": "URLError"
-    },
-    {
-      "source": "https://www.telefon.com/support",
-      "feed_url": "https://www.telefon.com/support",
-      "title": "",
       "saved": 0,
-      "method": "none"
+      "error": "SSL TLSV1_ALERT_UNRECOGNIZED_NAME - host unresolvable"
     }
   ],
-  "fetched": "2026-06-14T20:42:17Z",
+  "fetched": "2026-06-27T13:15:10Z",
   "post_count": 0
 }
