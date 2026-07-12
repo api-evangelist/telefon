@@ -1,0 +1,15 @@
+generated: '2026-07-11'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: developers.telefon.com
+  https: false
+- host: api.telefon.com
+  https: false
+domains:
+- domain: telefon.com
+  dnssec: false
+  caa: []
+  spf: false
+  dmarc: true
+  dmarc_policy: quarantine

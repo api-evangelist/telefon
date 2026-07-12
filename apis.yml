@@ -153,6 +153,10 @@ apis:
       - type: Email
         url: mailto:api@telefon.com
 common:
+  - type: DomainSecurity
+    url: security/telefon-domain-security.yml
+  - type: Authentication
+    url: authentication/telefon-authentication.yml
   - type: GettingStarted
     url: https://developers.telefon.com/getting-started
   - type: Authentication
