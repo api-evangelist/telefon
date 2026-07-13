@@ -2,11 +2,10 @@
   "repo": "telefon",
   "feeds": [
     {
-      "source": "https://blog.telefon.com",
-      "saved": 0,
-      "error": "SSL TLSV1_ALERT_UNRECOGNIZED_NAME - host unresolvable"
+      "source": "https://www.telefon.com/support",
+      "error": "HTTPError"
     }
   ],
-  "fetched": "2026-06-27T13:15:10Z",
+  "fetched": "2026-07-11T11:50:51Z",
   "post_count": 0
 }
