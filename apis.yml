@@ -153,6 +153,8 @@ apis:
       - type: Email
         url: mailto:api@telefon.com
 common:
+  - type: AgenticAccess
+    url: agentic-access/telefon-agentic-access.yml
   - type: DomainSecurity
     url: security/telefon-domain-security.yml
   - type: Authentication
