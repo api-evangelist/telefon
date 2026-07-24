@@ -1,0 +1,99 @@
+openapi: 3.0.3
+info:
+  title: Telefon Number Management Available Numbers Conferences API
+  description: Search, purchase, configure, and manage phone numbers across 70+ countries. Supports local, national, mobile, toll-free, and short code numbers.
+  version: v1
+  contact:
+    name: Telefon Support
+    url: https://www.telefon.com/support
+  termsOfService: https://www.telefon.com/terms
+servers:
+- url: https://api.telefon.com/v1/numbers
+  description: Telefon Number Management API
+security:
+- ApiKeyAuth: []
+tags:
+- name: Conferences
+  description: Multi-party conferencing
+paths:
+  /conferences:
+    get:
+      operationId: listConferences
+      summary: List Conferences
+      description: List conference calls.
+      tags:
+      - Conferences
+      responses:
+        '200':
+          description: List of conferences
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  conferences:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Conference'
+    post:
+      operationId: createConference
+      summary: Create Conference
+      description: Create a new conference room.
+      tags:
+      - Conferences
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                friendly_name:
+                  type: string
+                  description: Human-readable conference name
+                max_participants:
+                  type: integer
+                  default: 250
+                  description: Maximum number of participants
+                record:
+                  type: boolean
+                  description: Auto-record the conference
+      responses:
+        '201':
+          description: Conference created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conference'
+components:
+  schemas:
+    Conference:
+      type: object
+      required:
+      - id
+      - status
+      properties:
+        id:
+          type: string
+          description: Unique conference identifier
+        friendly_name:
+          type: string
+          description: Conference name
+        status:
+          type: string
+          enum:
+          - init
+          - in-progress
+          - completed
+          description: Conference status
+        participant_count:
+          type: integer
+          description: Current participant count
+        date_created:
+          type: string
+          format: date-time
+          description: Creation timestamp
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key

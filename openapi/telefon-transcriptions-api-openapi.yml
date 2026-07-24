@@ -1,0 +1,124 @@
+openapi: 3.0.3
+info:
+  title: Telefon Number Management Available Numbers Transcriptions API
+  description: Search, purchase, configure, and manage phone numbers across 70+ countries. Supports local, national, mobile, toll-free, and short code numbers.
+  version: v1
+  contact:
+    name: Telefon Support
+    url: https://www.telefon.com/support
+  termsOfService: https://www.telefon.com/terms
+servers:
+- url: https://api.telefon.com/v1/numbers
+  description: Telefon Number Management API
+security:
+- ApiKeyAuth: []
+tags:
+- name: Transcriptions
+  description: Recording transcription management
+paths:
+  /recordings/{recording_id}/transcriptions:
+    get:
+      operationId: getRecordingTranscriptions
+      summary: Get Recording Transcriptions
+      description: List transcriptions for a recording.
+      tags:
+      - Transcriptions
+      parameters:
+      - name: recording_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique recording identifier
+      responses:
+        '200':
+          description: Transcription list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  transcriptions:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Transcription'
+    post:
+      operationId: createTranscription
+      summary: Create Transcription
+      description: Request AI transcription of a recording.
+      tags:
+      - Transcriptions
+      parameters:
+      - name: recording_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique recording identifier
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                language_code:
+                  type: string
+                  description: BCP-47 language code (e.g., en-US, nl-NL, de-DE)
+                  default: en-US
+                redact_pii:
+                  type: boolean
+                  description: Automatically redact PII from the transcript
+                  default: false
+      responses:
+        '202':
+          description: Transcription job accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transcription'
+components:
+  schemas:
+    Transcription:
+      type: object
+      required:
+      - id
+      - recording_id
+      - status
+      properties:
+        id:
+          type: string
+          description: Unique transcription identifier
+        recording_id:
+          type: string
+          description: Associated recording ID
+        status:
+          type: string
+          enum:
+          - queued
+          - in-progress
+          - completed
+          - failed
+          description: Transcription status
+        language_code:
+          type: string
+          description: Language used for transcription
+        transcript_text:
+          type: string
+          description: Full transcription text
+        confidence:
+          type: number
+          format: float
+          description: Transcription confidence score (0.0-1.0)
+        date_created:
+          type: string
+          format: date-time
+          description: Creation timestamp
+        date_updated:
+          type: string
+          format: date-time
+          description: Last updated timestamp
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key

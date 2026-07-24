@@ -1,22 +1,20 @@
 openapi: 3.0.3
 info:
-  title: Telefon SMS API
-  description: >-
-    Send and receive SMS and MMS messages globally. Supports A2P messaging,
-    two-way SMS, delivery receipts, and inbound webhooks.
+  title: Telefon Number Management Available Numbers Messages API
+  description: Search, purchase, configure, and manage phone numbers across 70+ countries. Supports local, national, mobile, toll-free, and short code numbers.
   version: v1
   contact:
     name: Telefon Support
     url: https://www.telefon.com/support
   termsOfService: https://www.telefon.com/terms
 servers:
-  - url: https://api.telefon.com/v1/sms
-    description: Telefon SMS API
+- url: https://api.telefon.com/v1/numbers
+  description: Telefon Number Management API
 security:
-  - ApiKeyAuth: []
+- ApiKeyAuth: []
 tags:
-  - name: Messages
-    description: Send and receive SMS and MMS messages
+- name: Messages
+  description: Send and receive SMS and MMS messages
 paths:
   /messages:
     get:
@@ -24,31 +22,40 @@ paths:
       summary: List Messages
       description: List sent and received messages with filtering options.
       tags:
-        - Messages
+      - Messages
       parameters:
-        - name: direction
-          in: query
-          schema:
-            type: string
-            enum: [inbound, outbound]
-          description: Filter by direction
-        - name: status
-          in: query
-          schema:
-            type: string
-            enum: [queued, sending, sent, delivered, undelivered, failed, received]
-          description: Filter by status
-        - name: page
-          in: query
-          schema:
-            type: integer
-          description: Page number
-        - name: page_size
-          in: query
-          schema:
-            type: integer
-            maximum: 100
-          description: Results per page
+      - name: direction
+        in: query
+        schema:
+          type: string
+          enum:
+          - inbound
+          - outbound
+        description: Filter by direction
+      - name: status
+        in: query
+        schema:
+          type: string
+          enum:
+          - queued
+          - sending
+          - sent
+          - delivered
+          - undelivered
+          - failed
+          - received
+        description: Filter by status
+      - name: page
+        in: query
+        schema:
+          type: integer
+        description: Page number
+      - name: page_size
+        in: query
+        schema:
+          type: integer
+          maximum: 100
+        description: Results per page
       responses:
         '200':
           description: List of messages
@@ -68,7 +75,7 @@ paths:
       summary: Send Message
       description: Send an SMS or MMS message.
       tags:
-        - Messages
+      - Messages
       requestBody:
         required: true
         content:
@@ -76,8 +83,8 @@ paths:
             schema:
               type: object
               required:
-                - to
-                - from
+              - to
+              - from
               properties:
                 to:
                   type: string
@@ -109,14 +116,14 @@ paths:
       summary: Get Message
       description: Get details for a specific message.
       tags:
-        - Messages
+      - Messages
       parameters:
-        - name: message_id
-          in: path
-          required: true
-          schema:
-            type: string
-          description: Unique message identifier
+      - name: message_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique message identifier
       responses:
         '200':
           description: Message details
@@ -131,43 +138,47 @@ paths:
       summary: Delete Message
       description: Delete a message record.
       tags:
-        - Messages
+      - Messages
       parameters:
-        - name: message_id
-          in: path
-          required: true
-          schema:
-            type: string
-          description: Unique message identifier
+      - name: message_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique message identifier
       responses:
         '204':
           description: Message deleted
 components:
-  securitySchemes:
-    ApiKeyAuth:
-      type: apiKey
-      in: header
-      name: X-API-Key
   schemas:
     Message:
       type: object
       required:
-        - id
-        - status
-        - direction
-        - from
-        - to
+      - id
+      - status
+      - direction
+      - from
+      - to
       properties:
         id:
           type: string
           description: Unique message identifier
         status:
           type: string
-          enum: [queued, sending, sent, delivered, undelivered, failed, received]
+          enum:
+          - queued
+          - sending
+          - sent
+          - delivered
+          - undelivered
+          - failed
+          - received
           description: Delivery status
         direction:
           type: string
-          enum: [inbound, outbound]
+          enum:
+          - inbound
+          - outbound
           description: Message direction
         from:
           type: string
@@ -204,3 +215,8 @@ components:
         error_message:
           type: string
           description: Error description if failed
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key

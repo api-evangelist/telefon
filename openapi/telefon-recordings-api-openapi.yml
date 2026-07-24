@@ -1,0 +1,153 @@
+openapi: 3.0.3
+info:
+  title: Telefon Number Management Available Numbers Recordings API
+  description: Search, purchase, configure, and manage phone numbers across 70+ countries. Supports local, national, mobile, toll-free, and short code numbers.
+  version: v1
+  contact:
+    name: Telefon Support
+    url: https://www.telefon.com/support
+  termsOfService: https://www.telefon.com/terms
+servers:
+- url: https://api.telefon.com/v1/numbers
+  description: Telefon Number Management API
+security:
+- ApiKeyAuth: []
+tags:
+- name: Recordings
+  description: Call recording management
+paths:
+  /recordings:
+    get:
+      operationId: listRecordings
+      summary: List Recordings
+      description: List call recordings with optional filtering.
+      tags:
+      - Recordings
+      parameters:
+      - name: call_id
+        in: query
+        schema:
+          type: string
+        description: Filter by call ID
+      - name: status
+        in: query
+        schema:
+          type: string
+          enum:
+          - in-progress
+          - completed
+          - failed
+        description: Filter by status
+      - name: page
+        in: query
+        schema:
+          type: integer
+        description: Page number
+      - name: page_size
+        in: query
+        schema:
+          type: integer
+          maximum: 100
+        description: Results per page
+      responses:
+        '200':
+          description: List of recordings
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  recordings:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Recording'
+                  total:
+                    type: integer
+  /recordings/{recording_id}:
+    get:
+      operationId: getRecording
+      summary: Get Recording
+      description: Get details and download URL for a recording.
+      tags:
+      - Recordings
+      parameters:
+      - name: recording_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique recording identifier
+      responses:
+        '200':
+          description: Recording details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Recording'
+        '404':
+          description: Recording not found
+    delete:
+      operationId: deleteRecording
+      summary: Delete Recording
+      description: Permanently delete a recording.
+      tags:
+      - Recordings
+      parameters:
+      - name: recording_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique recording identifier
+      responses:
+        '204':
+          description: Recording deleted
+components:
+  schemas:
+    Recording:
+      type: object
+      required:
+      - id
+      - call_id
+      - status
+      properties:
+        id:
+          type: string
+          description: Unique recording identifier
+        call_id:
+          type: string
+          description: Associated call ID
+        status:
+          type: string
+          enum:
+          - in-progress
+          - completed
+          - failed
+          description: Recording status
+        duration:
+          type: integer
+          description: Duration in seconds
+        channels:
+          type: integer
+          enum:
+          - 1
+          - 2
+          description: Audio channels (1=mono, 2=dual)
+        media_url:
+          type: string
+          description: Download URL (MP3 or WAV)
+        price:
+          type: string
+          description: Storage cost
+        price_unit:
+          type: string
+          description: Currency code
+        date_created:
+          type: string
+          format: date-time
+          description: Creation timestamp
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key

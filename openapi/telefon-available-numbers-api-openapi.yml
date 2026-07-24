@@ -1,0 +1,120 @@
+openapi: 3.0.3
+info:
+  title: Telefon Number Management Available Numbers API
+  description: Search, purchase, configure, and manage phone numbers across 70+ countries. Supports local, national, mobile, toll-free, and short code numbers.
+  version: v1
+  contact:
+    name: Telefon Support
+    url: https://www.telefon.com/support
+  termsOfService: https://www.telefon.com/terms
+servers:
+- url: https://api.telefon.com/v1/numbers
+  description: Telefon Number Management API
+security:
+- ApiKeyAuth: []
+tags:
+- name: Available Numbers
+  description: Search for available numbers to purchase
+paths:
+  /available:
+    get:
+      operationId: searchAvailableNumbers
+      summary: Search Available Numbers
+      description: Search for available phone numbers matching specified criteria.
+      tags:
+      - Available Numbers
+      parameters:
+      - name: country_code
+        in: query
+        required: true
+        schema:
+          type: string
+        description: ISO 3166-1 alpha-2 country code
+      - name: type
+        in: query
+        schema:
+          type: string
+          enum:
+          - local
+          - national
+          - mobile
+          - toll-free
+          - short-code
+        description: Number type
+      - name: area_code
+        in: query
+        schema:
+          type: string
+        description: Area code for local numbers
+      - name: sms_enabled
+        in: query
+        schema:
+          type: boolean
+        description: Filter for SMS-capable numbers
+      - name: voice_enabled
+        in: query
+        schema:
+          type: boolean
+        description: Filter for voice-capable numbers
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          maximum: 20
+        description: Max results to return
+      responses:
+        '200':
+          description: Available numbers
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  available_numbers:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/AvailableNumber'
+components:
+  schemas:
+    AvailableNumber:
+      type: object
+      required:
+      - phone_number
+      - country_code
+      - type
+      properties:
+        phone_number:
+          type: string
+          description: Phone number in E.164 format
+        friendly_name:
+          type: string
+          description: Formatted display number
+        country_code:
+          type: string
+          description: ISO country code
+        type:
+          type: string
+          enum:
+          - local
+          - national
+          - mobile
+          - toll-free
+          - short-code
+          description: Number type
+        capabilities:
+          type: object
+          properties:
+            voice:
+              type: boolean
+            sms:
+              type: boolean
+            mms:
+              type: boolean
+        monthly_rate:
+          type: string
+          description: Monthly cost
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
