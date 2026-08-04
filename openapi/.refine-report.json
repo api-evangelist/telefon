@@ -1,0 +1,26 @@
+{
+  "provider": "telefon",
+  "sources": [
+    "telefon-available-numbers-api-openapi.yml",
+    "telefon-calls-api-openapi.yml",
+    "telefon-conferences-api-openapi.yml",
+    "telefon-messages-api-openapi.yml",
+    "telefon-owned-numbers-api-openapi.yml",
+    "telefon-recordings-api-openapi.yml",
+    "telefon-transcriptions-api-openapi.yml"
+  ],
+  "outputs": [
+    "telefon-available-numbers-api-openapi.yml",
+    "telefon-calls-api-openapi.yml",
+    "telefon-conferences-api-openapi.yml",
+    "telefon-messages-api-openapi.yml",
+    "telefon-owned-numbers-api-openapi.yml",
+    "telefon-recordings-api-openapi.yml",
+    "telefon-transcriptions-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

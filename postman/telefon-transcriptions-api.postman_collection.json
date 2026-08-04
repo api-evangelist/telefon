@@ -1,0 +1,275 @@
+{
+  "info": {
+    "_postman_id": "8fe0b1d0-c66f-46d0-83a6-086722d641a3",
+    "name": "Telefon Number Management Available Numbers Transcriptions API",
+    "description": "Search, purchase, configure, and manage phone numbers across 70+ countries. Supports local, national, mobile, toll-free, and short code numbers.\n\nContact Support:\n Name: Telefon Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:08:43.000Z",
+    "updatedAt": "2026-07-28T03:08:43.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-8fe0b1d0-c66f-46d0-83a6-086722d641a3"
+  },
+  "item": [
+    {
+      "name": "recordings",
+      "item": [
+        {
+          "name": "{recording_id}",
+          "item": [
+            {
+              "name": "transcriptions",
+              "item": [
+                {
+                  "name": "Get Recording Transcriptions",
+                  "id": "d1c6e4bd-0f25-48e7-a324-ac36029405be",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/recordings/:recording_id/transcriptions",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "recordings",
+                        ":recording_id",
+                        "transcriptions"
+                      ],
+                      "variable": [
+                        {
+                          "id": "4687290a-f24f-40e3-972a-409fb4893b85",
+                          "key": "recording_id",
+                          "value": "<string>",
+                          "description": "(Required) Unique recording identifier"
+                        }
+                      ]
+                    },
+                    "description": "List transcriptions for a recording."
+                  },
+                  "response": [
+                    {
+                      "id": "6fa7c872-59a9-40be-ad85-80aa7b311734",
+                      "name": "Transcription list",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "X-API-Key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/recordings/:recording_id/transcriptions",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "recordings",
+                            ":recording_id",
+                            "transcriptions"
+                          ],
+                          "variable": [
+                            {
+                              "key": "recording_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"transcriptions\": [\n    {\n      \"id\": \"<string>\",\n      \"recording_id\": \"<string>\",\n      \"status\": \"queued\",\n      \"language_code\": \"<string>\",\n      \"transcript_text\": \"<string>\",\n      \"confidence\": \"<float>\",\n      \"date_created\": \"<dateTime>\",\n      \"date_updated\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"recording_id\": \"<string>\",\n      \"status\": \"failed\",\n      \"language_code\": \"<string>\",\n      \"transcript_text\": \"<string>\",\n      \"confidence\": \"<float>\",\n      \"date_created\": \"<dateTime>\",\n      \"date_updated\": \"<dateTime>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:08:44.000Z",
+                      "updatedAt": "2026-07-28T03:08:44.000Z",
+                      "uid": "35240-6fa7c872-59a9-40be-ad85-80aa7b311734"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:08:44.000Z",
+                  "updatedAt": "2026-07-28T03:08:44.000Z",
+                  "uid": "35240-d1c6e4bd-0f25-48e7-a324-ac36029405be"
+                },
+                {
+                  "name": "Create Transcription",
+                  "id": "f1e91da2-01d5-4f8a-9f02-18c4a4163aef",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"language_code\": \"en-US\",\n  \"redact_pii\": false\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/recordings/:recording_id/transcriptions",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "recordings",
+                        ":recording_id",
+                        "transcriptions"
+                      ],
+                      "variable": [
+                        {
+                          "id": "887b12e7-0793-4182-b0d8-aaa476e2b83e",
+                          "key": "recording_id",
+                          "value": "<string>",
+                          "description": "(Required) Unique recording identifier"
+                        }
+                      ]
+                    },
+                    "description": "Request AI transcription of a recording."
+                  },
+                  "response": [
+                    {
+                      "id": "34d0949b-f06b-4dd4-b2d0-4a73cd3d379d",
+                      "name": "Transcription job accepted",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "X-API-Key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"language_code\": \"en-US\",\n  \"redact_pii\": false\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/recordings/:recording_id/transcriptions",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "recordings",
+                            ":recording_id",
+                            "transcriptions"
+                          ],
+                          "variable": [
+                            {
+                              "key": "recording_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Accepted",
+                      "code": 202,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"recording_id\": \"<string>\",\n  \"status\": \"completed\",\n  \"language_code\": \"<string>\",\n  \"transcript_text\": \"<string>\",\n  \"confidence\": \"<float>\",\n  \"date_created\": \"<dateTime>\",\n  \"date_updated\": \"<dateTime>\"\n}",
+                      "createdAt": "2026-07-28T03:08:44.000Z",
+                      "updatedAt": "2026-07-28T03:08:44.000Z",
+                      "uid": "35240-34d0949b-f06b-4dd4-b2d0-4a73cd3d379d"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:08:44.000Z",
+                  "updatedAt": "2026-07-28T03:08:44.000Z",
+                  "uid": "35240-f1e91da2-01d5-4f8a-9f02-18c4a4163aef"
+                }
+              ],
+              "id": "238f5026-730a-40dc-a290-2b5dac13ae19",
+              "createdAt": "2026-07-28T03:08:44.000Z",
+              "updatedAt": "2026-07-28T03:08:44.000Z",
+              "uid": "35240-238f5026-730a-40dc-a290-2b5dac13ae19"
+            }
+          ],
+          "id": "d46ab36d-d921-4508-a255-36f260bb8501",
+          "createdAt": "2026-07-28T03:08:44.000Z",
+          "updatedAt": "2026-07-28T03:08:44.000Z",
+          "uid": "35240-d46ab36d-d921-4508-a255-36f260bb8501"
+        }
+      ],
+      "id": "117e5417-9c95-4829-8b1e-b95f43267d2f",
+      "createdAt": "2026-07-28T03:08:44.000Z",
+      "updatedAt": "2026-07-28T03:08:44.000Z",
+      "uid": "35240-117e5417-9c95-4829-8b1e-b95f43267d2f"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-API-Key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.telefon.com/v1/numbers"
+    }
+  ]
+}

@@ -1,0 +1,271 @@
+openapi: 3.0.3
+info:
+  title: Telefon Voice API
+  description: >-
+    Programmable voice API for building call-based applications. Make outbound calls,
+    handle inbound calls, build IVR menus, conference calls, and control calls in real-time.
+    Supports SIP trunking, WebRTC, TTS, and call recording.
+  version: v1
+  contact:
+    name: Telefon Support
+    url: https://www.telefon.com/support
+    email: api@telefon.com
+  termsOfService: https://www.telefon.com/terms
+servers:
+  - url: https://api.telefon.com/v1/voice
+    description: Telefon Voice API
+security:
+  - ApiKeyAuth: []
+tags:
+  - name: Calls
+    description: Make and manage phone calls
+  - name: Conferences
+    description: Multi-party conferencing
+paths:
+  /calls:
+    get:
+      operationId: listCalls
+      summary: List Calls
+      description: Retrieve a paginated list of calls with filtering options.
+      tags:
+        - Calls
+      parameters:
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [queued, ringing, in-progress, completed, failed, busy, no-answer, canceled]
+          description: Filter by call status
+        - name: direction
+          in: query
+          schema:
+            type: string
+            enum: [inbound, outbound]
+          description: Filter by call direction
+        - name: page
+          in: query
+          schema:
+            type: integer
+          description: Page number
+        - name: page_size
+          in: query
+          schema:
+            type: integer
+            maximum: 100
+          description: Results per page
+      responses:
+        '200':
+          description: List of calls
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  calls:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Call'
+                  total:
+                    type: integer
+    post:
+      operationId: createCall
+      summary: Create Call
+      description: Initiate an outbound voice call.
+      tags:
+        - Calls
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - to
+                - from
+              properties:
+                to:
+                  type: string
+                  description: Destination phone number in E.164 format
+                from:
+                  type: string
+                  description: Caller ID phone number (must be owned)
+                url:
+                  type: string
+                  description: Webhook URL for call flow control
+                status_callback:
+                  type: string
+                  description: URL to receive call status events
+                timeout:
+                  type: integer
+                  default: 30
+                  description: Seconds to wait for answer
+                record:
+                  type: boolean
+                  description: Record the call automatically
+      responses:
+        '201':
+          description: Call created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Call'
+  /calls/{call_id}:
+    get:
+      operationId: getCall
+      summary: Get Call
+      description: Get details for a specific call by ID.
+      tags:
+        - Calls
+      parameters:
+        - name: call_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unique call identifier
+      responses:
+        '200':
+          description: Call details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Call'
+        '404':
+          description: Call not found
+    delete:
+      operationId: endCall
+      summary: End Call
+      description: Hang up an active call.
+      tags:
+        - Calls
+      parameters:
+        - name: call_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unique call identifier
+      responses:
+        '204':
+          description: Call ended
+  /conferences:
+    get:
+      operationId: listConferences
+      summary: List Conferences
+      description: List conference calls.
+      tags:
+        - Conferences
+      responses:
+        '200':
+          description: List of conferences
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  conferences:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Conference'
+    post:
+      operationId: createConference
+      summary: Create Conference
+      description: Create a new conference room.
+      tags:
+        - Conferences
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                friendly_name:
+                  type: string
+                  description: Human-readable conference name
+                max_participants:
+                  type: integer
+                  default: 250
+                  description: Maximum number of participants
+                record:
+                  type: boolean
+                  description: Auto-record the conference
+      responses:
+        '201':
+          description: Conference created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conference'
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+  schemas:
+    Call:
+      type: object
+      required:
+        - id
+        - status
+        - direction
+        - from
+        - to
+      properties:
+        id:
+          type: string
+          description: Unique call identifier
+        status:
+          type: string
+          enum: [queued, ringing, in-progress, completed, failed, busy, no-answer, canceled]
+          description: Current call status
+        direction:
+          type: string
+          enum: [inbound, outbound]
+          description: Call direction
+        from:
+          type: string
+          description: Originating phone number (E.164)
+        to:
+          type: string
+          description: Destination phone number (E.164)
+        duration:
+          type: integer
+          description: Duration in seconds
+        start_time:
+          type: string
+          format: date-time
+          description: When the call started
+        end_time:
+          type: string
+          format: date-time
+          description: When the call ended
+        price:
+          type: string
+          description: Cost of the call
+        price_unit:
+          type: string
+          description: ISO 4217 currency code
+    Conference:
+      type: object
+      required:
+        - id
+        - status
+      properties:
+        id:
+          type: string
+          description: Unique conference identifier
+        friendly_name:
+          type: string
+          description: Conference name
+        status:
+          type: string
+          enum: [init, in-progress, completed]
+          description: Conference status
+        participant_count:
+          type: integer
+          description: Current participant count
+        date_created:
+          type: string
+          format: date-time
+          description: Creation timestamp

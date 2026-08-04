@@ -1,0 +1,477 @@
+{
+  "info": {
+    "_postman_id": "20bf4bd7-be4e-4722-aa26-0411ca8ee19a",
+    "name": "Telefon Number Management Available Numbers Messages API",
+    "description": "Search, purchase, configure, and manage phone numbers across 70+ countries. Supports local, national, mobile, toll-free, and short code numbers.\n\nContact Support:\n Name: Telefon Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:08:32.000Z",
+    "updatedAt": "2026-07-28T03:08:33.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-20bf4bd7-be4e-4722-aa26-0411ca8ee19a"
+  },
+  "item": [
+    {
+      "name": "messages",
+      "item": [
+        {
+          "name": "{message_id}",
+          "item": [
+            {
+              "name": "Get Message",
+              "id": "a4a675be-035d-4c25-849c-97ac59f9c3d9",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/messages/:message_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "messages",
+                    ":message_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "57c604d6-4483-46ba-a48f-b7cd97cb9357",
+                      "key": "message_id",
+                      "value": "<string>",
+                      "description": "(Required) Unique message identifier"
+                    }
+                  ]
+                },
+                "description": "Get details for a specific message."
+              },
+              "response": [
+                {
+                  "id": "e33e7964-defc-4c39-be39-608ca2c160f0",
+                  "name": "Message details",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-API-Key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/messages/:message_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "messages",
+                        ":message_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "message_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"status\": \"queued\",\n  \"direction\": \"inbound\",\n  \"from\": \"<string>\",\n  \"to\": \"<string>\",\n  \"body\": \"<string>\",\n  \"num_segments\": \"<integer>\",\n  \"num_media\": \"<integer>\",\n  \"price\": \"<string>\",\n  \"price_unit\": \"<string>\",\n  \"date_created\": \"<dateTime>\",\n  \"date_sent\": \"<dateTime>\",\n  \"error_code\": \"<integer>\",\n  \"error_message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:08:33.000Z",
+                  "updatedAt": "2026-07-28T03:08:33.000Z",
+                  "uid": "35240-e33e7964-defc-4c39-be39-608ca2c160f0"
+                },
+                {
+                  "id": "9f178405-1b0a-440d-ba44-56482d4e23d0",
+                  "name": "Message not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-API-Key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/messages/:message_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "messages",
+                        ":message_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "message_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:08:33.000Z",
+                  "updatedAt": "2026-07-28T03:08:33.000Z",
+                  "uid": "35240-9f178405-1b0a-440d-ba44-56482d4e23d0"
+                }
+              ],
+              "createdAt": "2026-07-28T03:08:33.000Z",
+              "updatedAt": "2026-07-28T03:08:33.000Z",
+              "uid": "35240-a4a675be-035d-4c25-849c-97ac59f9c3d9"
+            },
+            {
+              "name": "Delete Message",
+              "id": "07823c77-bf43-4b9d-ae0c-35b7284cd625",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/messages/:message_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "messages",
+                    ":message_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "07d2488b-1dec-4c05-a2f3-f4bd262d4501",
+                      "key": "message_id",
+                      "value": "<string>",
+                      "description": "(Required) Unique message identifier"
+                    }
+                  ]
+                },
+                "description": "Delete a message record."
+              },
+              "response": [
+                {
+                  "id": "878dbfe7-b4d8-4399-af13-bab94a92f2c6",
+                  "name": "Message deleted",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-API-Key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/messages/:message_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "messages",
+                        ":message_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "message_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:08:33.000Z",
+                  "updatedAt": "2026-07-28T03:08:33.000Z",
+                  "uid": "35240-878dbfe7-b4d8-4399-af13-bab94a92f2c6"
+                }
+              ],
+              "createdAt": "2026-07-28T03:08:33.000Z",
+              "updatedAt": "2026-07-28T03:08:33.000Z",
+              "uid": "35240-07823c77-bf43-4b9d-ae0c-35b7284cd625"
+            }
+          ],
+          "id": "07fe6cef-264b-41e9-b37f-828e19155b03",
+          "createdAt": "2026-07-28T03:08:33.000Z",
+          "updatedAt": "2026-07-28T03:08:33.000Z",
+          "uid": "35240-07fe6cef-264b-41e9-b37f-828e19155b03"
+        },
+        {
+          "name": "List Messages",
+          "id": "05c89ea7-d997-4473-a0e5-565c1adae5b8",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/messages?direction=outbound&status=failed&page=<integer>&page_size=<integer>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "messages"
+              ],
+              "query": [
+                {
+                  "description": "Filter by direction",
+                  "key": "direction",
+                  "value": "outbound"
+                },
+                {
+                  "description": "Filter by status",
+                  "key": "status",
+                  "value": "failed"
+                },
+                {
+                  "description": "Page number",
+                  "key": "page",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "Results per page",
+                  "key": "page_size",
+                  "value": "<integer>"
+                }
+              ]
+            },
+            "description": "List sent and received messages with filtering options."
+          },
+          "response": [
+            {
+              "id": "563fe71a-72b0-4ad4-87d3-0ae3dc3413a2",
+              "name": "List of messages",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/messages?direction=outbound&status=failed&page=<integer>&page_size=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "messages"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter by direction",
+                      "key": "direction",
+                      "value": "outbound"
+                    },
+                    {
+                      "description": "Filter by status",
+                      "key": "status",
+                      "value": "failed"
+                    },
+                    {
+                      "description": "Page number",
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Results per page",
+                      "key": "page_size",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"messages\": [\n    {\n      \"id\": \"<string>\",\n      \"status\": \"sent\",\n      \"direction\": \"inbound\",\n      \"from\": \"<string>\",\n      \"to\": \"<string>\",\n      \"body\": \"<string>\",\n      \"num_segments\": \"<integer>\",\n      \"num_media\": \"<integer>\",\n      \"price\": \"<string>\",\n      \"price_unit\": \"<string>\",\n      \"date_created\": \"<dateTime>\",\n      \"date_sent\": \"<dateTime>\",\n      \"error_code\": \"<integer>\",\n      \"error_message\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"status\": \"received\",\n      \"direction\": \"outbound\",\n      \"from\": \"<string>\",\n      \"to\": \"<string>\",\n      \"body\": \"<string>\",\n      \"num_segments\": \"<integer>\",\n      \"num_media\": \"<integer>\",\n      \"price\": \"<string>\",\n      \"price_unit\": \"<string>\",\n      \"date_created\": \"<dateTime>\",\n      \"date_sent\": \"<dateTime>\",\n      \"error_code\": \"<integer>\",\n      \"error_message\": \"<string>\"\n    }\n  ],\n  \"total\": \"<integer>\"\n}",
+              "createdAt": "2026-07-28T03:08:33.000Z",
+              "updatedAt": "2026-07-28T03:08:33.000Z",
+              "uid": "35240-563fe71a-72b0-4ad4-87d3-0ae3dc3413a2"
+            }
+          ],
+          "createdAt": "2026-07-28T03:08:33.000Z",
+          "updatedAt": "2026-07-28T03:08:33.000Z",
+          "uid": "35240-05c89ea7-d997-4473-a0e5-565c1adae5b8"
+        },
+        {
+          "name": "Send Message",
+          "id": "e614d650-855c-4d6a-a766-04cb310f9459",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"to\": \"<string>\",\n  \"from\": \"<string>\",\n  \"body\": \"<string>\",\n  \"media_url\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"status_callback\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/messages",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "messages"
+              ]
+            },
+            "description": "Send an SMS or MMS message."
+          },
+          "response": [
+            {
+              "id": "c079d0ac-aa0b-4811-b8c6-4f2fefeee8ba",
+              "name": "Message sent",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"to\": \"<string>\",\n  \"from\": \"<string>\",\n  \"body\": \"<string>\",\n  \"media_url\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"status_callback\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/messages",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "messages"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"id\": \"<string>\",\n  \"status\": \"queued\",\n  \"direction\": \"inbound\",\n  \"from\": \"<string>\",\n  \"to\": \"<string>\",\n  \"body\": \"<string>\",\n  \"num_segments\": \"<integer>\",\n  \"num_media\": \"<integer>\",\n  \"price\": \"<string>\",\n  \"price_unit\": \"<string>\",\n  \"date_created\": \"<dateTime>\",\n  \"date_sent\": \"<dateTime>\",\n  \"error_code\": \"<integer>\",\n  \"error_message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:08:33.000Z",
+              "updatedAt": "2026-07-28T03:08:33.000Z",
+              "uid": "35240-c079d0ac-aa0b-4811-b8c6-4f2fefeee8ba"
+            }
+          ],
+          "createdAt": "2026-07-28T03:08:33.000Z",
+          "updatedAt": "2026-07-28T03:08:33.000Z",
+          "uid": "35240-e614d650-855c-4d6a-a766-04cb310f9459"
+        }
+      ],
+      "id": "64078744-d546-4434-82ba-e13347852e36",
+      "createdAt": "2026-07-28T03:08:33.000Z",
+      "updatedAt": "2026-07-28T03:08:33.000Z",
+      "uid": "35240-64078744-d546-4434-82ba-e13347852e36"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-API-Key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.telefon.com/v1/numbers"
+    }
+  ]
+}

@@ -1,0 +1,206 @@
+openapi: 3.0.3
+info:
+  title: Telefon SMS API
+  description: >-
+    Send and receive SMS and MMS messages globally. Supports A2P messaging,
+    two-way SMS, delivery receipts, and inbound webhooks.
+  version: v1
+  contact:
+    name: Telefon Support
+    url: https://www.telefon.com/support
+  termsOfService: https://www.telefon.com/terms
+servers:
+  - url: https://api.telefon.com/v1/sms
+    description: Telefon SMS API
+security:
+  - ApiKeyAuth: []
+tags:
+  - name: Messages
+    description: Send and receive SMS and MMS messages
+paths:
+  /messages:
+    get:
+      operationId: listMessages
+      summary: List Messages
+      description: List sent and received messages with filtering options.
+      tags:
+        - Messages
+      parameters:
+        - name: direction
+          in: query
+          schema:
+            type: string
+            enum: [inbound, outbound]
+          description: Filter by direction
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [queued, sending, sent, delivered, undelivered, failed, received]
+          description: Filter by status
+        - name: page
+          in: query
+          schema:
+            type: integer
+          description: Page number
+        - name: page_size
+          in: query
+          schema:
+            type: integer
+            maximum: 100
+          description: Results per page
+      responses:
+        '200':
+          description: List of messages
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  messages:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Message'
+                  total:
+                    type: integer
+    post:
+      operationId: sendMessage
+      summary: Send Message
+      description: Send an SMS or MMS message.
+      tags:
+        - Messages
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - to
+                - from
+              properties:
+                to:
+                  type: string
+                  description: Recipient phone number in E.164 format
+                from:
+                  type: string
+                  description: Sender phone number (must be owned)
+                body:
+                  type: string
+                  description: Message text
+                media_url:
+                  type: array
+                  items:
+                    type: string
+                  description: Media URLs for MMS
+                status_callback:
+                  type: string
+                  description: URL for delivery status webhooks
+      responses:
+        '201':
+          description: Message sent
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+  /messages/{message_id}:
+    get:
+      operationId: getMessage
+      summary: Get Message
+      description: Get details for a specific message.
+      tags:
+        - Messages
+      parameters:
+        - name: message_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unique message identifier
+      responses:
+        '200':
+          description: Message details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+        '404':
+          description: Message not found
+    delete:
+      operationId: deleteMessage
+      summary: Delete Message
+      description: Delete a message record.
+      tags:
+        - Messages
+      parameters:
+        - name: message_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unique message identifier
+      responses:
+        '204':
+          description: Message deleted
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+  schemas:
+    Message:
+      type: object
+      required:
+        - id
+        - status
+        - direction
+        - from
+        - to
+      properties:
+        id:
+          type: string
+          description: Unique message identifier
+        status:
+          type: string
+          enum: [queued, sending, sent, delivered, undelivered, failed, received]
+          description: Delivery status
+        direction:
+          type: string
+          enum: [inbound, outbound]
+          description: Message direction
+        from:
+          type: string
+          description: Sender phone number
+        to:
+          type: string
+          description: Recipient phone number
+        body:
+          type: string
+          description: Message text content
+        num_segments:
+          type: integer
+          description: Number of SMS segments
+        num_media:
+          type: integer
+          description: Number of media attachments
+        price:
+          type: string
+          description: Message cost
+        price_unit:
+          type: string
+          description: Currency code
+        date_created:
+          type: string
+          format: date-time
+          description: Creation timestamp
+        date_sent:
+          type: string
+          format: date-time
+          description: When the message was sent
+        error_code:
+          type: integer
+          description: Error code if failed
+        error_message:
+          type: string
+          description: Error description if failed

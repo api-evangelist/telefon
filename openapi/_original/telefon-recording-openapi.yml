@@ -1,0 +1,244 @@
+openapi: 3.0.3
+info:
+  title: Telefon Call Recording API
+  description: >-
+    Record, transcribe, and manage call recordings with dual-channel support,
+    AI transcription in 30+ languages, and compliance archiving.
+  version: v1
+  contact:
+    name: Telefon Support
+    url: https://www.telefon.com/support
+  termsOfService: https://www.telefon.com/terms
+servers:
+  - url: https://api.telefon.com/v1/recording
+    description: Telefon Recording API
+security:
+  - ApiKeyAuth: []
+tags:
+  - name: Recordings
+    description: Call recording management
+  - name: Transcriptions
+    description: Recording transcription management
+paths:
+  /recordings:
+    get:
+      operationId: listRecordings
+      summary: List Recordings
+      description: List call recordings with optional filtering.
+      tags:
+        - Recordings
+      parameters:
+        - name: call_id
+          in: query
+          schema:
+            type: string
+          description: Filter by call ID
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [in-progress, completed, failed]
+          description: Filter by status
+        - name: page
+          in: query
+          schema:
+            type: integer
+          description: Page number
+        - name: page_size
+          in: query
+          schema:
+            type: integer
+            maximum: 100
+          description: Results per page
+      responses:
+        '200':
+          description: List of recordings
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  recordings:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Recording'
+                  total:
+                    type: integer
+  /recordings/{recording_id}:
+    get:
+      operationId: getRecording
+      summary: Get Recording
+      description: Get details and download URL for a recording.
+      tags:
+        - Recordings
+      parameters:
+        - name: recording_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unique recording identifier
+      responses:
+        '200':
+          description: Recording details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Recording'
+        '404':
+          description: Recording not found
+    delete:
+      operationId: deleteRecording
+      summary: Delete Recording
+      description: Permanently delete a recording.
+      tags:
+        - Recordings
+      parameters:
+        - name: recording_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unique recording identifier
+      responses:
+        '204':
+          description: Recording deleted
+  /recordings/{recording_id}/transcriptions:
+    get:
+      operationId: getRecordingTranscriptions
+      summary: Get Recording Transcriptions
+      description: List transcriptions for a recording.
+      tags:
+        - Transcriptions
+      parameters:
+        - name: recording_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unique recording identifier
+      responses:
+        '200':
+          description: Transcription list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  transcriptions:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Transcription'
+    post:
+      operationId: createTranscription
+      summary: Create Transcription
+      description: Request AI transcription of a recording.
+      tags:
+        - Transcriptions
+      parameters:
+        - name: recording_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unique recording identifier
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                language_code:
+                  type: string
+                  description: BCP-47 language code (e.g., en-US, nl-NL, de-DE)
+                  default: en-US
+                redact_pii:
+                  type: boolean
+                  description: Automatically redact PII from the transcript
+                  default: false
+      responses:
+        '202':
+          description: Transcription job accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transcription'
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+  schemas:
+    Recording:
+      type: object
+      required:
+        - id
+        - call_id
+        - status
+      properties:
+        id:
+          type: string
+          description: Unique recording identifier
+        call_id:
+          type: string
+          description: Associated call ID
+        status:
+          type: string
+          enum: [in-progress, completed, failed]
+          description: Recording status
+        duration:
+          type: integer
+          description: Duration in seconds
+        channels:
+          type: integer
+          enum: [1, 2]
+          description: Audio channels (1=mono, 2=dual)
+        media_url:
+          type: string
+          description: Download URL (MP3 or WAV)
+        price:
+          type: string
+          description: Storage cost
+        price_unit:
+          type: string
+          description: Currency code
+        date_created:
+          type: string
+          format: date-time
+          description: Creation timestamp
+    Transcription:
+      type: object
+      required:
+        - id
+        - recording_id
+        - status
+      properties:
+        id:
+          type: string
+          description: Unique transcription identifier
+        recording_id:
+          type: string
+          description: Associated recording ID
+        status:
+          type: string
+          enum: [queued, in-progress, completed, failed]
+          description: Transcription status
+        language_code:
+          type: string
+          description: Language used for transcription
+        transcript_text:
+          type: string
+          description: Full transcription text
+        confidence:
+          type: number
+          format: float
+          description: Transcription confidence score (0.0-1.0)
+        date_created:
+          type: string
+          format: date-time
+          description: Creation timestamp
+        date_updated:
+          type: string
+          format: date-time
+          description: Last updated timestamp
