@@ -1,0 +1,189 @@
+{
+  "item": [
+    {
+      "id": "c5ea8879-ffe3-4aa3-b8ab-16664a8b9243",
+      "name": "Available Numbers",
+      "description": {
+        "content": "Search for available numbers to purchase",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c40b4b05-4eb1-4623-bb31-5447129794b9",
+          "name": "Search Available Numbers",
+          "request": {
+            "name": "Search Available Numbers",
+            "description": {
+              "content": "Search for available phone numbers matching specified criteria.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "available"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "country_code",
+                  "value": "<string>",
+                  "description": "(Required) ISO 3166-1 alpha-2 country code"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Number type"
+                },
+                {
+                  "disabled": false,
+                  "key": "area_code",
+                  "value": "<string>",
+                  "description": "Area code for local numbers"
+                },
+                {
+                  "disabled": false,
+                  "key": "sms_enabled",
+                  "value": "<boolean>",
+                  "description": "Filter for SMS-capable numbers"
+                },
+                {
+                  "disabled": false,
+                  "key": "voice_enabled",
+                  "value": "<boolean>",
+                  "description": "Filter for voice-capable numbers"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Max results to return"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1b48fd04-d36d-42ef-bf61-832af29c6fd6",
+              "name": "Available numbers",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "available"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "country_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "area_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sms_enabled",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "voice_enabled",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"available_numbers\": [\n    {\n      \"phone_number\": \"string\",\n      \"country_code\": \"string\",\n      \"type\": \"local\",\n      \"friendly_name\": \"string\",\n      \"capabilities\": {\n        \"voice\": true,\n        \"sms\": false,\n        \"mms\": true\n      },\n      \"monthly_rate\": \"string\"\n    },\n    {\n      \"phone_number\": \"string\",\n      \"country_code\": \"string\",\n      \"type\": \"short-code\",\n      \"friendly_name\": \"string\",\n      \"capabilities\": {\n        \"voice\": true,\n        \"sms\": false,\n        \"mms\": false\n      },\n      \"monthly_rate\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.telefon.com/v1/numbers",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-API-Key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "2395c794-26ba-4aac-b1a5-21bbd33d416d",
+    "name": "Telefon Number Management Available Numbers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Search, purchase, configure, and manage phone numbers across 70+ countries. Supports local, national, mobile, toll-free, and short code numbers.\n\nContact Support:\n Name: Telefon Support",
+      "type": "text/plain"
+    }
+  }
+}

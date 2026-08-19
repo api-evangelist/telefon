@@ -1,0 +1,440 @@
+{
+  "item": [
+    {
+      "id": "d70f3ec3-495b-46c9-b5bb-b8687ad54d8a",
+      "name": "Owned Numbers",
+      "description": {
+        "content": "Manage numbers in your account",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4e907ea7-5109-4cdb-a2bd-6175b6711582",
+          "name": "List Owned Numbers",
+          "request": {
+            "name": "List Owned Numbers",
+            "description": {
+              "content": "List all phone numbers in your account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "owned"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Filter by number type"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "Page number"
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "Results per page"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "405362dc-6624-411e-ae63-e09085f226b7",
+              "name": "Owned numbers",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "owned"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"numbers\": [\n    {\n      \"phone_number\": \"string\",\n      \"type\": \"mobile\",\n      \"friendly_name\": \"string\",\n      \"country_code\": \"string\",\n      \"capabilities\": {\n        \"voice\": false,\n        \"sms\": false,\n        \"mms\": false\n      },\n      \"voice_url\": \"string\",\n      \"sms_url\": \"string\",\n      \"date_created\": \"1990-02-06T13:26:35.591Z\",\n      \"monthly_rate\": \"string\"\n    },\n    {\n      \"phone_number\": \"string\",\n      \"type\": \"local\",\n      \"friendly_name\": \"string\",\n      \"country_code\": \"string\",\n      \"capabilities\": {\n        \"voice\": true,\n        \"sms\": false,\n        \"mms\": true\n      },\n      \"voice_url\": \"string\",\n      \"sms_url\": \"string\",\n      \"date_created\": \"1981-02-22T01:16:36.429Z\",\n      \"monthly_rate\": \"string\"\n    }\n  ],\n  \"total\": 6065\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2cd006b8-875c-4687-ae36-949199c9b74b",
+          "name": "Purchase Number",
+          "request": {
+            "name": "Purchase Number",
+            "description": {
+              "content": "Purchase a phone number.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "owned"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"phone_number\": \"<string>\",\n  \"voice_url\": \"<string>\",\n  \"sms_url\": \"<string>\",\n  \"friendly_name\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0fd79f99-631e-4c63-b10b-8ec18a8ef6a9",
+              "name": "Number purchased",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "owned"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"phone_number\": \"<string>\",\n  \"voice_url\": \"<string>\",\n  \"sms_url\": \"<string>\",\n  \"friendly_name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"phone_number\": \"string\",\n  \"type\": \"short-code\",\n  \"friendly_name\": \"string\",\n  \"country_code\": \"string\",\n  \"capabilities\": {\n    \"voice\": true,\n    \"sms\": false,\n    \"mms\": true\n  },\n  \"voice_url\": \"string\",\n  \"sms_url\": \"string\",\n  \"date_created\": \"2003-03-13T13:04:25.549Z\",\n  \"monthly_rate\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c26583d5-efce-4752-b8e7-1d0896b9eebc",
+          "name": "Get Owned Number",
+          "request": {
+            "name": "Get Owned Number",
+            "description": {
+              "content": "Get configuration for a specific owned number.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "owned",
+                ":phone_number"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "phone_number",
+                  "description": "(Required) Phone number in E.164 format"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "17d2359d-911c-430e-99c9-ddb52e770159",
+              "name": "Number details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "owned",
+                    ":phone_number"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "phone_number",
+                      "description": "(Required) Phone number in E.164 format"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"phone_number\": \"string\",\n  \"type\": \"short-code\",\n  \"friendly_name\": \"string\",\n  \"country_code\": \"string\",\n  \"capabilities\": {\n    \"voice\": true,\n    \"sms\": false,\n    \"mms\": true\n  },\n  \"voice_url\": \"string\",\n  \"sms_url\": \"string\",\n  \"date_created\": \"2003-03-13T13:04:25.549Z\",\n  \"monthly_rate\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cb1d3e50-1372-40b6-a43a-3dc458f9f436",
+          "name": "Release Number",
+          "request": {
+            "name": "Release Number",
+            "description": {
+              "content": "Release a phone number from your account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "owned",
+                ":phone_number"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "phone_number",
+                  "description": "(Required) Phone number in E.164 format"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ab8de73c-178a-47b1-b92f-479691d62e73",
+              "name": "Number released",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "owned",
+                    ":phone_number"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "phone_number",
+                      "description": "(Required) Phone number in E.164 format"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.telefon.com/v1/numbers",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-API-Key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "3286735e-8d78-4d8f-b9d3-5aef13a646aa",
+    "name": "Telefon Number Management Available Numbers Owned Numbers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Search, purchase, configure, and manage phone numbers across 70+ countries. Supports local, national, mobile, toll-free, and short code numbers.\n\nContact Support:\n Name: Telefon Support",
+      "type": "text/plain"
+    }
+  }
+}
