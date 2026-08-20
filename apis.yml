@@ -144,6 +144,8 @@ apis:
   humanURL: https://developers.telefon.com/voice
   baseURL: https://api.telefon.com/v1/voice
   tags:
+  - Message
+  tags_raw:
   - Messages
   properties:
   - type: OpenAPI
