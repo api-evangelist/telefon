@@ -5,6 +5,18 @@ description: >-
   receive phone calls, send SMS and MMS messages, manage phone number inventories, and record calls for compliance and
   quality assurance purposes. Telefon supports global coverage across 180+ countries with competitive per-minute and
   per-message pricing.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: enterprise
   onboarding: self-serve
