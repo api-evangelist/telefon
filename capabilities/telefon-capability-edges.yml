@@ -1,0 +1,37 @@
+slug: telefon
+provider: Telefon
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Telecommunications
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 2
+edges:
+- tag: Available Numbers
+  spec_file: telefon-available-numbers-api-openapi.yml
+  capability_id: BC-2640.30
+  capability_id_l1: BC-2640
+  capability_name: Numbering Resource Management
+  confidence: 0.75
+  evidence: GET /available  searchAvailableNumbers  "Search Available Numbers"; "Search, purchase, configure,
+    and manage phone numbers across 70+ countries. Supports local, national, mobile, toll-free, and short
+    code numbers."
+  reason: Searching and acquiring telephone numbers from inventory is stewardship and assignment of numbering
+    resources — Numbering Resource Management.
+- tag: Owned Numbers
+  spec_file: telefon-owned-numbers-api-openapi.yml
+  capability_id: BC-2640.30
+  capability_id_l1: BC-2640
+  capability_name: Numbering Resource Management
+  confidence: 0.75
+  evidence: POST /owned purchaseNumber "Purchase Number"; DELETE /owned/{phone_number} releaseNumber "Release
+    Number"; schema OwnedNumber
+  reason: Operations acquire, inventory, and release telephone numbers, which is stewardship and assignment
+    of telephone numbering resources (BC-2640.30). Slight discount because the vendor is a CPaaS reselling
+    numbers rather than a regulator-licensed number holder.

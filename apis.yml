@@ -289,6 +289,9 @@ apis:
   - type: Compliance
     url: https://www.telefon.com/compliance
 common:
+  - type: CapabilityMap
+    url: capabilities/telefon-capability-edges.yml
+    name: Telefon Business Capability Map
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/telefon/overview
   - type: AgenticAccess
