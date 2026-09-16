@@ -1,10 +1,9 @@
 name: Telefon
-description: >-
-  Telefon is a cloud-based programmable communications platform providing voice calling, SMS messaging, number
-  management, and call recording APIs for developers and enterprises. The platform enables applications to make and
-  receive phone calls, send SMS and MMS messages, manage phone number inventories, and record calls for compliance and
-  quality assurance purposes. Telefon supports global coverage across 180+ countries with competitive per-minute and
-  per-message pricing.
+description: Telefon is a cloud-based programmable communications platform providing voice calling, SMS
+  messaging, number management, and call recording APIs for developers and enterprises. The platform enables
+  applications to make and receive phone calls, send SMS and MMS messages, manage phone number inventories,
+  and record calls for compliance and quality assurance purposes. Telefon supports global coverage across
+  180+ countries with competitive per-minute and per-message pricing.
 deliveryModel:
   model: saas
   open_source: false
@@ -35,18 +34,18 @@ image: https://www.telefon.com/logo.png
 url: https://www.telefon.com
 type: Index
 tags:
-  - Call Recording
-  - Communications
-  - CPaaS
-  - Global Coverage
-  - Messaging
-  - Number Provisioning
-  - SMS
-  - Telephony
-  - Voice
-  - VoIP
+- Call Recording
+- Communications
+- CPaaS
+- Global Coverage
+- Messaging
+- Number Provisioning
+- SMS
+- Telephony
+- Voice
+- VoIP
 created: '2024-01-15'
-modified: '2026-05-19'
+modified: '2026-09-16'
 specificationVersion: '0.23'
 apis:
 - aid: telefon:telefon-available-numbers-api
@@ -290,41 +289,43 @@ apis:
   - type: Compliance
     url: https://www.telefon.com/compliance
 common:
-  - type: CapabilityMap
-    url: capabilities/telefon-capability-edges.yml
-    name: Telefon Business Capability Map
-  - type: PostmanWorkspace
-    url: https://www.postman.com/kinlaneapi/telefon/overview
-  - type: AgenticAccess
-    url: agentic-access/telefon-agentic-access.yml
-  - type: DomainSecurity
-    url: security/telefon-domain-security.yml
-  - type: Authentication
-    url: authentication/telefon-authentication.yml
-  - type: GettingStarted
-    url: https://developers.telefon.com/getting-started
-  - type: Authentication
-    url: https://developers.telefon.com/authentication
-  - type: SDKs
-    url: https://www.telefon.com/sdks
-  - type: StatusPage
-    url: https://status.telefon.com
-  - type: TermsOfService
-    url: https://www.telefon.com/terms
-  - type: PrivacyPolicy
-    url: https://www.telefon.com/privacy
-  - type: Support
-    url: https://www.telefon.com/support
-  - type: Blog
-    url: https://blog.telefon.com
-  - type: ChangeLog
-    url: https://developers.telefon.com/changelog
-  - type: Pricing
-    url: https://www.telefon.com/pricing
-  - type: GitHub
-    url: https://github.com/telefon-api
-  - type: LlmsText
-    url: https://telefon.com/llms.txt
+- type: Website
+  url: https://telefon.com
+- type: CapabilityMap
+  url: capabilities/telefon-capability-edges.yml
+  name: Telefon Business Capability Map
+- type: PostmanWorkspace
+  url: https://www.postman.com/kinlaneapi/telefon/overview
+- type: AgenticAccess
+  url: agentic-access/telefon-agentic-access.yml
+- type: DomainSecurity
+  url: security/telefon-domain-security.yml
+- type: Authentication
+  url: authentication/telefon-authentication.yml
+- type: GettingStarted
+  url: https://developers.telefon.com/getting-started
+- type: Authentication
+  url: https://developers.telefon.com/authentication
+- type: SDKs
+  url: https://www.telefon.com/sdks
+- type: StatusPage
+  url: https://status.telefon.com
+- type: TermsOfService
+  url: https://www.telefon.com/terms
+- type: PrivacyPolicy
+  url: https://www.telefon.com/privacy
+- type: Support
+  url: https://www.telefon.com/support
+- type: Blog
+  url: https://blog.telefon.com
+- type: ChangeLog
+  url: https://developers.telefon.com/changelog
+- type: Pricing
+  url: https://www.telefon.com/pricing
+- type: GitHub
+  url: https://github.com/telefon-api
+- type: LlmsText
+  url: https://telefon.com/llms.txt
 maintainers:
-  - name: Telefon API Team
-    email: api@telefon.com
+- name: Telefon API Team
+  email: api@telefon.com
